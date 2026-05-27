@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ogden's Basic English · 850词长难句</title>
+<style>
+  /* ===== 基础重置与变量 ===== */
+  :root {
+    --bg: #F5F0E8;
+    --bg-card: #FFFFFF;
+    --text-primary: #1A1A1A;
+    --text-secondary: #5C5C5C;
+    --text-muted: #9A9A9A;
+    --accent: #B87333;
+    --accent-light: #F5E6C8;
+    --accent-green: #5A9A7A;
+    --border: #E0E0E0;
+    --border-warm: #D8D0C4;
+    --radius: 10px;
+    --radius-pill: 999px;
+    --shadow: 0 1px 3px rgba(0,0,0,0.04);
+    --font-serif: 'Playfair Display', 'Noto Serif SC', Georgia, 'Songti SC', serif;
+    --font-sans: -apple-system, 'PingFang SC', 'Microsoft YaHei', 'Helvetica Neue', sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: var(--font-sans);
+    background: var(--bg);
+    color: var(--text-primary);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ===== 头部 ===== */
+  .header {
+    text-align: center;
+    padding: 60px 20px 40px;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .header h1 {
+    font-family: var(--font-serif);
+    font-size: 2.4rem;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+  }
+
+  .header h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .header .subtitle {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    margin-bottom: 6px;
+  }
+
+  .header .tagline {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .divider {
+    width: 60px;
+    height: 2px;
+    background: var(--accent);
+    margin: 24px auto;
+    border-radius: 1px;
+  }
+
+  /* ===== 搜索与筛选栏 ===== */
+  .toolbar {
+    max-width: 800px;
+    margin: 0 auto 32px;
+    padding: 0 20px;
+  }
+
+  .search-box {
+    width: 100%;
+    padding: 12px 20px;
+    border: 1px solid var(--border-warm);
+    border-radius: var(--radius-pill);
+    font-size: 0.95rem;
+    background: var(--bg-card);
+    color: var(--text-primary);
+    outline: none;
+    transition: border-color 0.2s;
+    font-family: var(--font-sans);
+  }
+
+  .search-box::placeholder { color: var(--text-muted); }
+  .search-box:focus { border-color: var(--accent); }
+
+  .filter-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 16px;
+  }
+
+  .filter-btn {
+    padding: 6px 16px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-pill);
+    background: var(--bg-card);
+    color: var(--text-secondary);
+    font-size: 0.82rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: var(--font-sans);
+    white-space: nowrap;
+  }
+
+  .filter-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .filter-btn.active {
+    background: var(--text-primary);
+    color: #fff;
+    border-color: var(--text-primary);
+  }
+
+  /* ===== 统计信息 ===== */
+  .stats {
+    max-width: 800px;
+    margin: 0 auto 24px;
+    padding: 0 20px;
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .stat-chip {
+    padding: 4px 14px;
+    background: var(--accent-light);
+    color: var(--accent);
+    border-radius: var(--radius-pill);
+    font-size: 0.78rem;
+    font-weight: 500;
+  }
+
+  /* ===== 句子列表 ===== */
+  .sentence-list {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 20px 80px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .sentence-card {
+    background: var(--bg-card);
+    border-radius: var(--radius);
+    border-left: 4px solid var(--accent);
+    padding: 24px 28px;
+    transition: box-shadow 0.2s;
+    animation: fadeIn 0.3s ease;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .sentence-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.06); }
+
+  .card-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+
+  .card-num {
+    font-family: var(--font-serif);
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--accent);
+    min-width: 36px;
+  }
+
+  .card-topic {
+    padding: 3px 12px;
+    background: var(--accent-light);
+    color: var(--accent);
+    border-radius: var(--radius-pill);
+    font-size: 0.75rem;
+    font-weight: 500;
+  }
+
+  .card-en {
+    font-family: var(--font-serif);
+    font-size: 1.05rem;
+    line-height: 1.85;
+    color: var(--text-primary);
+    margin-bottom: 14px;
+    letter-spacing: 0.01em;
+  }
+
+  .card-zh {
+    font-size: 0.92rem;
+    line-height: 1.8;
+    color: var(--text-secondary);
+    padding-top: 14px;
+    border-top: 1px solid var(--border-warm);
+  }
+
+  /* ===== 回到顶部 ===== */
+  .back-top {
+    position: fixed;
+    bottom: 32px;
+    right: 32px;
+    width: 44px;
+    height: 44px;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    font-size: 1.2rem;
+    cursor: pointer;
+    opacity: 0;
+    transform: translateY(12px);
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 10px rgba(184,115,51,0.3);
+  }
+
+  .back-top.visible { opacity: 1; transform: translateY(0); }
+  .back-top:hover { transform: translateY(-2px); box-shadow: 0 4px 16px rgba(184,115,51,0.4); }
+
+  /* ===== 空状态 ===== */
+  .empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--text-muted);
+    font-size: 0.95rem;
+  }
+
+  /* ===== 响应式 ===== */
+  @media (max-width: 640px) {
+    .header { padding: 40px 16px 28px; }
+    .header h1 { font-size: 1.7rem; }
+    .sentence-card { padding: 18px 16px; }
+    .card-en { font-size: 0.95rem; }
+    .back-top { bottom: 20px; right: 20px; width: 38px; height: 38px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="header">
+  <h1>Ogden's <em>Basic</em> English</h1>
+  <p class="subtitle">850 词长难句 · 中英双语 · 100句精炼版</p>
+  <p class="tagline">A CONTROLLED LANGUAGE DESIGNED BY C.K. OGDEN · 1930</p>
+  <div class="divider"></div>
+</header>
+
+<div class="toolbar">
+  <input type="text" class="search-box" id="searchInput" placeholder="搜索句子、译文或主题...">
+  <div class="filter-bar" id="filterBar">
+    <button class="filter-btn active" data-filter="all">全部 100</button>
+    <button class="filter-btn" data-filter="生活">生活场景</button>
+    <button class="filter-btn" data-filter="自然">自然风光</button>
+    <button class="filter-btn" data-filter="工作">工作商业</button>
+    <button class="filter-btn" data-filter="社会">社会人文</button>
+    <button class="filter-btn" data-filter="情感">情感关系</button>
+    <button class="filter-btn" data-filter="知识">知识学习</button>
+    <button class="filter-btn" data-filter="冒险">冒险旅途</button>
+  </div>
+</div>
+
+<div class="stats" id="statsBar">
+  <span class="stat-chip">操作词 100</span>
+  <span class="stat-chip">通用词 400</span>
+  <span class="stat-chip">图示词 200</span>
+  <span class="stat-chip">性质词 100</span>
+  <span class="stat-chip">反义对 50</span>
+</div>
+
+<div class="sentence-list" id="sentenceList"></div>
+
+<button class="back-top" id="backTop" title="回到顶部">↑</button>
+
+<script>
+/**
+ * @description 100句长难句数据及页面交互逻辑
+ */
+
+// 主题分类映射
+const topicCategory = {
+  '工作管理': '工作', '邻里互助': '生活', '自然观察': '自然', '烹饪场景': '生活',
+  '家庭生活': '生活', '法律正义': '社会', '天气描写': '自然', '阅读体验': '知识',
+  '宠物生活': '生活', '海滩活动': '自然', '旅行经历': '冒险', '意外事故': '生活',
+  '调查推理': '知识', '医疗救治': '社会', '商业经营': '工作', '自然变化': '自然',
+  '离别场景': '情感', '会议讨论': '工作', '教育场景': '知识', '交通出行': '冒险',
+  '科学研究': '知识', '动物救助': '生活', '园艺种植': '自然', '工作细节': '工作',
+  '邻里噪音': '生活', '社区生活': '社会', '老年生活': '生活', '医疗咨询': '社会',
+  '军事行动': '社会', '户外徒步': '冒险', '自然风光': '自然', '建筑修复': '工作',
+  '校园生活': '知识', '工业生产': '工作', '讲故事': '知识', '医疗决策': '社会',
+  '政治辩论': '社会', '艺术教学': '知识', '历史记录': '知识', '体育竞技': '生活',
+  '社会关怀': '社会', '国家治理': '社会', '事故调查': '社会', '商业保密': '工作',
+  '乡村生活': '生活', '动物行为': '自然', '写作环境': '知识', '人际交往': '情感',
+  '自然循环': '自然', '独居生活': '生活', '家庭责任': '情感', '家庭记忆': '情感',
+  '月夜美景': '自然', '社区互助': '社会', '搜救成功': '冒险', '家庭聚会': '情感',
+  '登山探险': '冒险', '社区规划': '社会', '学习钻研': '知识', '厨房安全': '生活',
+  '商业谈判': '工作', '探索发现': '冒险', '建筑设计': '工作', '医疗康复': '社会',
+  '城市居住': '生活', '湖泊休闲': '自然', '晨间时光': '自然', '工程建筑': '工作',
+  '社区庆典': '社会', '家务清洁': '生活', '航海挑战': '冒险', '水源保护': '自然',
+  '旅途心情': '冒险', '助人为乐': '社会', '天气变化': '自然', '花园生态': '自然',
+  '城市景观': '生活', '历史文献': '知识', '特技表演': '冒险', '旅途休息': '冒险',
+  '战争回忆': '社会', '国家发展': '社会', '自然灾害': '自然', '交通延误': '冒险',
+  '家庭温馨': '情感', '雨天活动': '生活', '河流文明': '知识', '司法审判': '社会',
+  '秋日景色': '自然', '城市奋斗': '工作', '住宅描写': '生活', '历史研究': '知识',
+  '交通网络': '工作', '爱情婚姻': '情感', '火灾救援': '社会', '专家评估': '知识',
+  '山脉描写': '自然', '医疗建设': '社会', '善良行为': '情感', '海上旅行': '冒险'
+};
+
+// 100句长难句数据
+const sentences = [
+  {num:1,en:"The able manager, who had been awake since early morning, made a conscious decision to give every employee a clear direction for the complex project that would take much time and effort to complete before the end of the year.",zh:"那位能干的经理从清晨起就一直醒着，他做出了一个明智的决定，为每位员工明确了这个复杂项目的方向，该项目需要在年底前花费大量时间和精力才能完成。",topic:"工作管理"},
+  {num:2,en:"After the angry argument between the bent old man and the young boy over the broken bicycle, the kind neighbor came forward to offer his help, saying that he would fix the damage and make everything right again.",zh:"在那位驼背老人和小男孩因自行车损坏而发生激烈争吵之后，善良的邻居主动上前提供帮助，表示他会修理损坏的地方，让一切恢复正常。",topic:"邻里互助"},
+  {num:3,en:"The beautiful black bird, with its bright feathers and sharp beak, flew across the blue sky from the tall tree near the river to the small garden where the little girl was waiting with a happy smile on her face.",zh:"那只美丽的黑色鸟儿，有着明亮的羽毛和锋利的喙，从河边的高树飞过蓝天，来到小女孩带着幸福微笑等待的小花园。",topic:"自然观察"},
+  {num:4,en:"The boiling water in the big brass kettle on the electric stove made a loud noise as the steam came out, and the wise old cook, with her deep knowledge of chemical changes, knew exactly when the liquid was ready for making tea.",zh:"电炉上大铜壶里的沸水在水蒸气冒出时发出巨大声响，那位睿智的老厨师凭借她对化学变化的深刻了解，准确地知道液体何时适合泡茶。",topic:"烹饪场景"},
+  {num:5,en:"The brown bread, which was cheap but good, had a bitter taste because the grain used to make it was not of high quality, though the hungry family was still grateful to have some food on the table for their evening meal.",zh:"那种棕色的面包虽然便宜但还不错，却有一种苦味，因为制作它的谷物质量不高，尽管这饥饿的一家人仍然感激餐桌上能有食物作为晚餐。",topic:"家庭生活"},
+  {num:6,en:"The certain evidence that the cruel criminal had committed the violent crime was presented before the judge, who made a responsible decision to send him to prison for a long time as punishment for his bad behavior.",zh:"确凿的证据表明那个残忍的罪犯实施了暴力犯罪，法官在庭审中做出了负责任的决定，将他长期监禁以惩罚他的恶劣行为。",topic:"法律正义"},
+  {num:7,en:"The cold winter wind blew through the open window of the empty house, making the loose door shake and the hanging curtain move, while the dark clouds in the grey sky seemed to promise that snow would come soon.",zh:"寒冷的冬风吹过空房子的敞开的窗户，使松动的门摇晃，悬挂的窗帘飘动，而灰暗天空中的乌云似乎预示着雪即将来临。",topic:"天气描写"},
+  {num:8,en:"The complete story of how the dead man came back to life was written in the old book that the young medical student was reading with great interest, though some parts seemed strange and not quite true.",zh:"关于那个死人如何复活的完整故事写在那本年轻的医学生正饶有兴趣阅读的旧书中，尽管有些部分看起来很奇怪，不太真实。",topic:"阅读体验"},
+  {num:9,en:"The dear little white cat, which had been asleep on the soft cushion near the warm fire, suddenly became awake when it heard the loud noise of a dog barking outside the shut door of the comfortable house.",zh:"那只可爱的小白猫一直在温暖炉火旁的软垫子上睡觉，当它听到舒适房子紧闭的门外传来狗叫的巨响时，突然醒了过来。",topic:"宠物生活"},
+  {num:10,en:"The dry sand on the wide beach, under the bright sun, was so hot that the foolish boy who walked on it with bare feet had to run quickly to the water to put his burning skin in the cool liquid.",zh:"在明亮阳光下的宽阔海滩上，干燥的沙子非常烫，那个赤脚走在上面的愚蠢男孩不得不快速跑向海水，将他灼热的皮肤浸入清凉的液体中。",topic:"海滩活动"},
+  {num:11,en:"The early train, which was on its last trip for the day, moved slowly through the narrow mountain pass where the tall trees on both sides made the road dark, even though the sun was still high in the sky.",zh:"那趟早班火车当天最后一次行驶，缓慢地穿过狭窄的山口，两侧高大的树木使道路昏暗，尽管太阳仍然高挂在天空。",topic:"旅行经历"},
+  {num:12,en:"The empty glass bottle, which had contained the sweet red wine, rolled off the table and fell onto the hard stone floor, breaking into many small pieces that scattered across the clean white surface of the room.",zh:"那个曾装有甜红葡萄酒的空玻璃瓶从桌上滚落，摔在坚硬的石头地板上，碎成许多小片，散落在房间干净的白色地面上。",topic:"意外事故"},
+  {num:13,en:"The false statement that the feeble old woman made about seeing a strange light in the dark sky was not believed by the wise police officer, who had much experience with such stories and knew they were usually wrong.",zh:"那位虚弱的老妇人关于在黑暗天空中看到奇怪光芒的虚假陈述没有被明智的警察相信，他对这类故事有丰富经验，知道它们通常是错误的。",topic:"调查推理"},
+  {num:14,en:"The female doctor, with her general knowledge of medical science and special skill in surgery, was able to save the life of the ill child who had been brought to the hospital late at night by his worried parents.",zh:"那位女医生凭借她对医学的全面知识和外科的特殊技能，成功挽救了那个病童的生命，孩子是在深夜被焦虑的父母送到医院的。",topic:"医疗救治"},
+  {num:15,en:"The future of the young company, which had been started with little money but much hope, seemed uncertain as the economic conditions changed, though the responsible manager was working hard to keep the business going.",zh:"这家年轻公司的未来似乎不确定，它是在资金很少但希望很大的情况下创办的，随着经济状况的变化，尽管负责任的经理正在努力维持业务运转。",topic:"商业经营"},
+  {num:16,en:"The green leaves on the tall trees, which had been hanging still in the quiet morning air, began to move as a sudden gust of wind came from the west, bringing with it the promise of rain from the dark clouds.",zh:"高树上原本在宁静晨空中静止悬挂的绿叶开始晃动，因为一阵突如其来的风从西边吹来，带来了乌云即将降雨的预兆。",topic:"自然变化"},
+  {num:17,en:"The happy family, with their mixed feelings of joy and sadness, stood together on the platform to say goodbye to their dear son who was going on a long journey to a far country for his higher education.",zh:"那幸福的一家人怀着喜忧参半的心情，一起站在站台上与他们亲爱的儿子告别，儿子即将踏上遥远的旅程去异国他乡接受高等教育。",topic:"离别场景"},
+  {num:18,en:"The important meeting, which was held in the big room at the top of the high building, lasted for three hours as the committee members discussed every detail of the new plan to improve the public transport system.",zh:"那次重要会议在高楼顶层的大房间里举行，持续了三个小时，委员会成员们讨论了新计划的每一个细节，以改善公共交通系统。",topic:"会议讨论"},
+  {num:19,en:"The kind old teacher, with her long white hair and gentle smile, sat at her desk and read a story to the small children who were sitting on the floor in a circle, listening with great attention and interest.",zh:"那位善良的老教师，有着长长的白发和温柔的微笑，坐在她的书桌前给围成一圈坐在地上的小孩子们读故事，孩子们全神贯注、饶有兴趣地听着。",topic:"教育场景"},
+  {num:20,en:"The last train of the night, which was already late, finally came into the station with a loud noise, and the tired passengers got off with their heavy bags, looking forward to going home to their warm beds.",zh:"那趟深夜的末班车已经晚点，终于伴随着巨大的声响进站了，疲惫的乘客们提着沉重的行李下车，期待着回到他们温暖的床上。",topic:"交通出行"},
+  {num:21,en:"The liquid in the clear glass container, which had a strange blue color and a sweet smell, was carefully examined by the scientific expert who wanted to discover its true chemical nature and possible medical use.",zh:"那个透明玻璃容器中的液体有着奇怪的蓝色和甜味，科学专家仔细检查了它，希望发现它真正的化学性质和可能的医学用途。",topic:"科学研究"},
+  {num:22,en:"The little black dog, which had been lost for three days, was found by a kind man near the old church where it had been sleeping under a broken cart, looking thin and weak but still alive.",zh:"那只丢失了三天的小黑狗被一位善良的人在老教堂附近发现，它一直在一辆破旧的马车下睡觉，看起来又瘦又弱，但仍然活着。",topic:"动物救助"},
+  {num:23,en:"The living plants in the beautiful garden, which received much care and attention from the old gardener, grew well throughout the warm summer, producing bright flowers and sweet fruit for the family to enjoy.",zh:"美丽花园里的植物在老园丁的精心照料下生长良好，在整个温暖的夏季里绽放鲜艳的花朵，结出甜美的果实供这家人享用。",topic:"园艺种植"},
+  {num:24,en:"The loose button on his new coat, which had come off during the important meeting, was found by the careful secretary who kept it safe in a small box until she could give it back to her boss the next day.",zh:"他那件新外套上松动的纽扣在重要会议期间掉了下来，细心的秘书找到了它，把它安全地放在一个小盒子里，直到第二天能还给她的老板。",topic:"工作细节"},
+  {num:25,en:"The loud music coming from the open window of the house across the street made it difficult for the old man to get any sleep, even though it was well past midnight and most other people in the town were already asleep.",zh:"从街对面房子敞开的窗户传来的音乐使老人难以入睡，尽管已经过了午夜很久，镇上大多数其他人已经睡着了。",topic:"邻里噪音"},
+  {num:26,en:"The low wall around the small garden, which was made of rough stone and had been built many years ago, provided a safe place for the little children to play while their mothers sat nearby and talked together.",zh:"小花园周围低矮的围墙由粗糙的石头砌成，建于多年前，为小孩子提供了一个安全的玩耍场所，而他们的母亲们则坐在附近一起聊天。",topic:"社区生活"},
+  {num:27,en:"The married couple, who had lived in the same house for more than fifty years, sat together on the old wooden bench in their beautiful garden, holding hands and looking at the setting sun with happy smiles.",zh:"那对结婚五十多年的夫妇坐在他们美丽花园里旧木凳上，手牵着手，带着幸福的微笑看着落日。",topic:"老年生活"},
+  {num:28,en:"The medical expert, with his deep knowledge of the human body and its complex systems, was able to give a clear explanation of the disease to the worried family, helping them understand the necessary treatment.",zh:"那位医学专家对人体及其复杂系统有深刻的了解，能够向焦虑的家属清楚地解释这种疾病，帮助他们理解必要的治疗方法。",topic:"医疗咨询"},
+  {num:29,en:"The military operation, which had been carefully planned for many months, was finally put into action early in the morning when the soldiers moved forward under cover of the dark to attack the enemy position.",zh:"那个经过数月精心策划的军事行动终于在清晨付诸实施，士兵们在黑暗的掩护下向前推进，攻击敌人的阵地。",topic:"军事行动"},
+  {num:30,en:"The narrow path through the deep forest, which was covered with wet leaves and had rough stones on its surface, was difficult to walk on, but the young hikers kept going with strong determination to reach the top of the mountain.",zh:"穿过深林的狭窄小路覆盖着潮湿的落叶，表面有粗糙的石头，走起来很困难，但年轻的徒步者们带着坚定的决心继续前进，以到达山顶。",topic:"户外徒步"},
+  {num:31,en:"The natural beauty of the wide river, with its clear blue water and green banks covered with tall trees, attracted many visitors who came from far and near to enjoy the peaceful scene and take photographs.",zh:"宽阔的河流自然美景，清澈的蓝色河水和高大树木覆盖的绿色河岸，吸引了许多从远近而来的游客，他们来欣赏这宁静的景象并拍照留念。",topic:"自然风光"},
+  {num:32,en:"The necessary changes to the old building, which had been damaged by fire and weather over many years, were discussed at the committee meeting where the members agreed on a plan to make it safe and useful again.",zh:"在委员会会议上讨论了这座老建筑所需的必要改动，这座建筑多年来因火灾和天气而受损，委员们一致同意制定一个计划，使其重新变得安全有用。",topic:"建筑修复"},
+  {num:33,en:"The new student, who came from a small country school and had little experience of city life, found it difficult to make friends at first, but his kind nature and good humor soon made him popular among his classmates.",zh:"那位来自乡村小学、对城市生活经验不多的新生起初发现很难交到朋友，但他善良的天性和良好的幽默感很快使他在同学中受欢迎。",topic:"校园生活"},
+  {num:34,en:"The normal working day at the big factory, where hundreds of men and women made metal instruments for medical use, started early in the morning and continued until late in the evening with only a short break for the midday meal.",zh:"那家大工厂的正常工作日从清晨开始，一直持续到深夜，只有短暂的午休时间，数百名男女工人在那里生产医疗用的金属器械。",topic:"工业生产"},
+  {num:35,en:"The old man, with his long white beard and wise eyes, sat in the warm sunshine outside his small house and told stories to the village children about his adventures in far countries when he was young.",zh:"那位长着长长白胡子、眼神睿智的老人坐在他小屋外温暖的阳光里，给村里的孩子们讲述他年轻时在遥远国家的冒险故事。",topic:"讲故事"},
+  {num:36,en:"The only possible way to save the sick child, according to the medical expert, was to perform a complex operation that would require much skill and care, though there was still some danger involved in the procedure.",zh:"据医学专家说，挽救那个生病孩子的唯一可能方法是进行一个复杂的手术，这需要高超的技术和细心的照料，尽管手术过程中仍然存在一些危险。",topic:"医疗决策"},
+  {num:37,en:"The opposite opinions expressed by the two political representatives at the public meeting created a heated discussion among the audience, with some people supporting one view and others taking the contrary position.",zh:"两位政治代表在公开会议上表达的相反意见在听众中引发了激烈的讨论，一些人支持一种观点，另一些人则持相反立场。",topic:"政治辩论"},
+  {num:38,en:"The parallel lines drawn on the flat surface of the table, which were made with a sharp pencil and measured with great care, showed the students how to create a regular pattern for their art project.",zh:"用锋利的铅笔在桌面平坦表面上绘制的平行线，经过仔细测量，向学生们展示了如何为他们的艺术项目创建规则的图案。",topic:"艺术教学"},
+  {num:39,en:"The past events that had taken place in the old town, including the great fire and the violent storm, were recorded in the history books kept at the public library for anyone who wanted to learn about them.",zh:"发生在那座老城的过去事件，包括那场大火和猛烈的暴风雨，都被记录在公共图书馆保存的历史书中，供任何想了解它们的人阅读。",topic:"历史记录"},
+  {num:40,en:"The physical condition of the young athlete, who had trained hard for many months under the guidance of an expert coach, was at its highest level when he came to compete in the important national competition.",zh:"那位年轻运动员在专家教练的指导下刻苦训练了许多个月，当他来参加重要的全国比赛时，身体状况达到了最佳水平。",topic:"体育竞技"},
+  {num:41,en:"The poor family, who lived in a small house at the edge of the town and had very little money, worked hard every day to keep their children fed and clothed, though they could not afford many of the things they needed.",zh:"那个贫穷的家庭住在城镇边缘的一间小房子里，钱很少，每天辛勤工作以维持孩子们的衣食，尽管他们买不起许多需要的东西。",topic:"社会关怀"},
+  {num:42,en:"The present situation in the country, with its complex political and economic problems, requires careful thought and wise decisions from the government if there is to be any hope for a better future for all the people.",zh:"国家目前的形势，伴随着复杂的政治和经济问题，需要政府深思熟虑和明智决策，只有这样，全体人民才有希望迎来更美好的未来。",topic:"国家治理"},
+  {num:43,en:"The probable cause of the sudden accident, which had damaged the front of the car and broken the window glass, was the driver's loss of control when the vehicle hit a patch of wet oil on the road surface.",zh:"那场突然事故的可能原因是司机失控，当时车辆撞上了路面上一片潮湿的油渍，事故损坏了汽车前部并打碎了车窗玻璃。",topic:"事故调查"},
+  {num:44,en:"The private letter, which contained important information about the company's future plans, was kept in a safe place by the responsible manager who understood that it must not fall into the wrong hands.",zh:"那封包含公司未来计划重要信息的私人信件被负责任的经理保存在安全的地方，他明白这封信绝不能落入坏人之手。",topic:"商业保密"},
+  {num:45,en:"The pure water that came from the deep well in the center of the village was considered the best for making tea, and people would come from far and near to fill their containers with this clear, sweet liquid.",zh:"从村子中央深井里涌出的纯净水被认为是泡茶最好的水，人们会从远近各处赶来，用容器装满这种清澈甘甜的液体。",topic:"乡村生活"},
+  {num:46,en:"The quick brown fox jumped over the lazy dog in the garden, demonstrating how even animals with very different natures could share the same space in peace and harmony when they were not competing for food or territory.",zh:"那只敏捷的棕色狐狸跳过了花园里懒洋洋的狗，展示了即使是天性迥异的动物，当它们不为食物或领地竞争时，也能和平和谐地共享同一空间。",topic:"动物行为"},
+  {num:47,en:"The quiet little room at the top of the old house, with its small window looking out over the garden, was the perfect place for the young writer to work on her novel without any disturbance or noise.",zh:"那座老房子顶层安静的小房间，有一扇小窗户可以俯瞰花园，是年轻作家创作小说的理想之地，没有任何干扰或噪音。",topic:"写作环境"},
+  {num:48,en:"The ready smile on the young girl's face and her kind words to everyone she met made her popular in the small town, where people would often stop to talk with her and share their thoughts and feelings.",zh:"那个年轻女孩脸上随时绽放的微笑和她对遇到的每个人说的友善话语使她在小镇上很受欢迎，人们经常会停下来和她交谈，分享他们的想法和感受。",topic:"人际交往"},
+  {num:49,en:"The red apple that fell from the tree rolled down the slope and came to rest against the rough bark of another tree, where it would remain until some animal found it and made it part of their meal.",zh:"从树上掉下来的红苹果滚下山坡，靠在另一棵树的粗糙树皮上，它将一直待在那里，直到有动物发现它并将其作为食物的一部分。",topic:"自然循环"},
+  {num:50,en:"The regular sound of the clock in the hall, which marked every hour with a clear bell, was a comfort to the old man who lived alone and often felt uncertain about the passing of time during the long winter nights.",zh:"大厅里时钟规律的声音，每小时用清脆的铃声报时，给那位独居老人带来了安慰，他常常在漫长的冬夜里对时间的流逝感到不确定。",topic:"独居生活"},
+  {num:51,en:"The responsible young man, who had taken care of his sick mother for many years, made the difficult decision to leave his home and go to the big city in search of work that would allow him to support his family better.",zh:"那位负责任的年轻人照顾生病的母亲多年，他做出了艰难的决定，离开家乡前往大城市寻找工作，以便更好地养活家人。",topic:"家庭责任"},
+  {num:52,en:"The rough surface of the old wooden table, which had been used for many years in the family kitchen, showed the marks of countless meals and conversations that had taken place around it over time.",zh:"那张在家庭厨房里使用多年的旧木桌粗糙的表面，显示出无数餐食和谈话留下的痕迹，这些都是随着时间在这里发生的。",topic:"家庭记忆"},
+  {num:53,en:"The round face of the full moon, which shone with a bright silver light in the clear night sky, was reflected in the still water of the lake, creating a beautiful double image that seemed almost magical.",zh:"满月的圆脸在晴朗的夜空中闪耀着明亮的银光，倒映在平静的湖水中，创造出美丽的双重影像，看起来几乎像魔法一样。",topic:"月夜美景"},
+  {num:54,en:"The sad news of the accident spread quickly through the small town, and people came from all directions to offer their help and support to the family who had lost their home and all their possessions in the fire.",zh:"事故的噩耗迅速传遍了小镇，人们从四面八方赶来，向那些在火灾中失去家园和全部财产的家庭提供帮助和支持。",topic:"社区互助"},
+  {num:55,en:"The safe return of the little boy who had been lost in the forest for two days brought great joy to his family and to all the people in the town who had helped in the search and prayed for his safe recovery.",zh:"那个在森林中迷路两天的小男孩平安归来，给他的家人和镇上所有参与搜寻并祈祷他平安归来的人们带来了巨大的喜悦。",topic:"搜救成功"},
+  {num:56,en:"The same old story that had been told many times before was repeated again at the family gathering, but everyone still enjoyed hearing it because it brought back happy memories of their shared past.",zh:"那个已经讲过许多次的同样的老故事在家庭聚会上再次被讲述，但每个人仍然喜欢听，因为它唤起了他们共同过去的美好回忆。",topic:"家庭聚会"},
+  {num:57,en:"The second attempt to climb the high mountain was more successful than the first, as the experienced climbers had learned from their earlier mistakes and were better prepared for the difficult conditions they would face.",zh:"第二次攀登高山的尝试比第一次更成功，因为有经验的登山者从之前的错误中吸取了教训，为将要面对的困难条件做了更好的准备。",topic:"登山探险"},
+  {num:58,en:"The secret plan that had been carefully prepared by the committee was finally put into action, and the separate groups moved forward together to achieve their common purpose of improving the town's public services.",zh:"委员会精心准备的秘密计划终于付诸实施，各个小组一起向前推进，以实现他们改善城镇公共服务的共同目标。",topic:"社区规划"},
+  {num:59,en:"The serious young student, with his deep interest in scientific knowledge and his strong desire to understand how things work, spent many hours in the library reading books about the physical world and its natural laws.",zh:"那位认真的年轻学生对科学知识有着浓厚的兴趣，强烈渴望了解事物的工作原理，他在图书馆花了许多时间阅读关于物理世界及其自然法则的书籍。",topic:"学习钻研"},
+  {num:60,en:"The sharp knife that the cook used to cut the meat was kept in a special place where the children could not reach it, for everyone understood the danger of such an instrument in the wrong hands.",zh:"厨师用来切肉的锋利刀具被放在孩子们够不到的特殊地方，因为每个人都明白这种工具落入坏人之手的危险。",topic:"厨房安全"},
+  {num:61,en:"The short but important meeting between the two business representatives resulted in an agreement that would be of great benefit to both companies, though some details still needed to be worked out in the future.",zh:"两位商务代表之间简短但重要的会议达成了一项协议，这对两家公司都将大有裨益，尽管一些细节仍需在未来敲定。",topic:"商业谈判"},
+  {num:62,en:"The shut door of the old house, which had not been opened for many years, was finally unlocked by the new owner who was curious to discover what secrets might be hidden behind it in the dark rooms within.",zh:"那座多年未开启的老房子的紧闭大门终于被新主人打开了，他好奇地想发现里面黑暗房间中可能隐藏着什么秘密。",topic:"探索发现"},
+  {num:63,en:"The simple but beautiful design of the new building, with its clean lines and open spaces, was praised by everyone who saw it, and many people came from far and near to admire this example of modern architecture.",zh:"这座新建筑简洁而美丽的设计，线条清晰、空间开阔，受到每个看到它的人的赞扬，许多人从远近各处前来欣赏这座现代建筑的典范。",topic:"建筑设计"},
+  {num:64,en:"The slow but steady progress of the medical treatment gave hope to the sick man and his family, who had been waiting for some sign that his condition was getting better after many weeks of care.",zh:"医疗治疗缓慢但稳定的进展给了那位病人和他的家人希望，经过数周的护理，他们一直在等待他的病情好转的迹象。",topic:"医疗康复"},
+  {num:65,en:"The small but comfortable room at the top of the tall building had a wonderful view of the city, and the young writer who lived there found it the perfect place to work on his new novel in peace and quiet.",zh:"那座高楼顶层小而舒适的房间可以俯瞰城市的美景，住在那里的年轻作家发现这是他在平静和安静中创作新小说的理想之地。",topic:"城市居住"},
+  {num:66,en:"The smooth surface of the calm lake, which reflected the blue sky and white clouds above, was broken only by the gentle movement of a small boat carrying two old friends who were enjoying a peaceful afternoon together.",zh:"平静湖面光滑的表面倒映着上方的蓝天和白云，只有一艘小船的轻柔移动打破了宁静，船上载着两位老友，他们正在一起享受一个宁静的下午。",topic:"湖泊休闲"},
+  {num:67,en:"The soft light of the early morning sun came through the open window and fell on the sleeping face of the young child, who was having a beautiful dream about playing in a field of bright flowers with her friends.",zh:"清晨柔和的阳光透过敞开的窗户照进来，落在正在睡觉的年轻孩子脸上，她正在做一个美丽的梦，梦见和朋友们在一片鲜艳的花田中玩耍。",topic:"晨间时光"},
+  {num:68,en:"The solid structure of the old bridge, which had been built of strong stone and metal many years ago, was still in good condition and safe for use, though it showed some signs of age and weathering.",zh:"那座多年前用坚固石头和金属建造的老桥结构坚固，虽然显示出一些年代和风化的痕迹，但仍然状况良好，可以安全使用。",topic:"工程建筑"},
+  {num:69,en:"The special ceremony that took place in the town square on the warm summer evening brought together people from all parts of the community to celebrate the opening of the new public library that would serve everyone.",zh:"在那个温暖夏夜的城镇广场举行的特别仪式将社区各地的人们聚集在一起，庆祝将为所有人服务的新公共图书馆的开馆。",topic:"社区庆典"},
+  {num:70,en:"The sticky substance that had been left on the surface of the table by the children was difficult to remove, and the mother had to use special cleaning materials to make the surface smooth and clean again.",zh:"孩子们留在桌面上的粘性物质很难清除，母亲不得不使用特殊的清洁材料，才能使表面光滑干净。",topic:"家务清洁"},
+  {num:71,en:"The stiff wind that blew from the north made it difficult for the small boat to move forward, and the sailors had to work hard with all their strength to keep the vessel on its course toward the safe harbor.",zh:"从北方吹来的劲风使小船难以前进，水手们不得不竭尽全力努力工作，以保持船只驶向安全港口的航线。",topic:"航海挑战"},
+  {num:72,en:"The still water in the deep well, which had been the only source of liquid for the village for many generations, was clear and pure, and people came from far and near to fill their containers with it.",zh:"深井中静止的水是几代人以来村子里唯一的水源，清澈纯净，人们从远近各处赶来用容器装满它。",topic:"水源保护"},
+  {num:73,en:"The straight road that led from the small town to the big city was long and often boring, but the travelers were happy to be on their way to visit family and friends they had not seen for many years.",zh:"从小镇通往大城市的笔直道路漫长而常常令人乏味，但旅行者们很高兴能踏上旅途，去拜访多年未见的家人和朋友。",topic:"旅途心情"},
+  {num:74,en:"The strong man, with his great physical power and determined mind, was able to lift the heavy stone that had been blocking the road, allowing the waiting vehicles to pass through and continue their journey.",zh:"那个强壮的男人凭借他巨大的体力和坚定的意志，能够举起挡住道路的巨石，让等待的车辆通过并继续他们的旅程。",topic:"助人为乐"},
+  {num:75,en:"The sudden change in the weather, from warm sunshine to cold rain, caught the people in the town by surprise, and many had to take shelter in shops and public buildings until the storm passed.",zh:"天气的突然变化，从温暖的阳光到寒冷的雨水，让镇上的人们措手不及，许多人不得不在商店和公共建筑中避雨，直到暴风雨过去。",topic:"天气变化"},
+  {num:76,en:"The sweet smell of the flowers in the beautiful garden attracted many bees and butterflies, which moved from plant to plant in their search for food, creating a scene of natural harmony and life.",zh:"美丽花园中花朵的甜香吸引了许多蜜蜂和蝴蝶，它们在寻找食物时从一株植物飞到另一株植物，创造了一幅自然和谐与生命的景象。",topic:"花园生态"},
+  {num:77,en:"The tall building that stood at the corner of the busy street was the highest in the city, and from its top floor one could see far across the land to where the mountains met the sky in the distance.",zh:"矗立在繁忙街角的高楼是城市中最高的建筑，从它的顶层可以远眺大地，看到远处山脉与天空相接的地方。",topic:"城市景观"},
+  {num:78,en:"The thick book that contained the complete history of the nation was kept in a special place in the public library, where anyone who was interested could come and read about the past events that had shaped the country.",zh:"那本包含国家完整历史的厚书被保存在公共图书馆的特殊位置，任何感兴趣的人都可以来阅读那些塑造了国家的过去事件。",topic:"历史文献"},
+  {num:79,en:"The tight rope that had been stretched across the wide river was difficult to walk on, but the skilled performer was able to cross it with great confidence, much to the amazement of the crowd watching from both banks.",zh:"横跨宽阔河流的绷紧绳索很难行走，但技艺高超的表演者能够非常自信地穿过它，让两岸观看的人群大为惊叹。",topic:"特技表演"},
+  {num:80,en:"The tired old man, who had been walking for many hours under the hot sun, was glad to find a place in the shade of a tall tree where he could rest and drink some cool water from his bottle.",zh:"那位疲惫的老人在烈日下走了许多小时，很高兴能在高树的阴凉处找到一个休息的地方，喝一些瓶中的凉水。",topic:"旅途休息"},
+  {num:81,en:"The true story of how the small town had been saved from destruction during the great war was finally told by the old soldier who had been present at the events and had kept the secret for many years.",zh:"关于那座小镇如何在大战中免于毁灭的真实故事，最终由亲历事件并保守秘密多年的老兵讲述出来。",topic:"战争回忆"},
+  {num:82,en:"The uncertain future that lay ahead for the young country, which was still developing its political and economic systems, caused much concern among its leaders, who worked hard to make wise decisions for the benefit of all.",zh:"那个年轻国家面临的不确定未来，它仍在发展其政治和经济体系，引起了领导人们的极大关注，他们努力为全体人民的利益做出明智的决策。",topic:"国家发展"},
+  {num:83,en:"The violent storm that struck the town in the middle of the night caused great damage to many buildings and left the streets covered with broken trees and other debris, making it difficult for people to move about the next morning.",zh:"半夜袭击小镇的猛烈暴风雨对许多建筑造成了巨大破坏，街道上满是折断的树木和其他碎片，使人们第二天早上难以出行。",topic:"自然灾害"},
+  {num:84,en:"The waiting passengers at the train station, who had been there since early morning, were growing tired and impatient as the delay continued, though they knew that safety was more important than speed.",zh:"火车站的候车乘客从清晨就在那里，随着延误持续，他们变得越来越疲惫和不耐烦，尽管他们知道安全比速度更重要。",topic:"交通延误"},
+  {num:85,en:"The warm light of the fire in the small room made everyone feel comfortable and safe, and the family gathered together to share stories and enjoy each other's company on the cold winter evening.",zh:"小房间里炉火温暖的光芒让每个人都感到舒适和安全，一家人聚在一起分享故事，在寒冷的冬夜里享受彼此的陪伴。",topic:"家庭温馨"},
+  {num:86,en:"The wet ground, which had been soaked by the heavy rain during the night, made it difficult for the children to play outside, so they stayed in the house and found other ways to amuse themselves.",zh:"被夜间大雨浸透的潮湿地面使孩子们难以在户外玩耍，所以他们待在房子里，寻找其他娱乐方式。",topic:"雨天活动"},
+  {num:87,en:"The wide river that flowed through the center of the country was an important means of transport for goods and people, and many towns and cities had grown up along its banks over the centuries.",zh:"流经国家中心的宽阔河流是货物和人员运输的重要通道，几个世纪以来，许多城镇沿着河岸发展起来。",topic:"河流文明"},
+  {num:88,en:"The wise old judge, who had spent many years studying the law and understanding human nature, listened carefully to both sides of the argument before making his decision about the complex case.",zh:"那位睿智的老法官花了多年时间研究法律和理解人性，在做出关于这个复杂案件的决定之前，他仔细听取了双方的论点。",topic:"司法审判"},
+  {num:89,en:"The yellow leaves that fell from the tall trees in the autumn wind covered the ground with a bright carpet of color, creating a beautiful scene that attracted many visitors to the park to take photographs.",zh:"秋风中从高树上飘落的黄叶用鲜艳的色彩地毯覆盖了地面，创造了美丽的景象，吸引了许多游客到公园拍照。",topic:"秋日景色"},
+  {num:90,en:"The young man, who had left his home in the country to seek his fortune in the big city, found that life there was more difficult than he had expected, but he was determined to succeed through hard work and careful planning.",zh:"那个离开乡村家园去大城市闯荡的年轻人发现那里的生活比他预期的更艰难，但他决心通过努力工作和周密计划取得成功。",topic:"城市奋斗"},
+  {num:91,en:"The big white house at the end of the quiet street, with its beautiful garden and tall trees, was the home of a wealthy family who had lived there for many generations and were well known in the town.",zh:"那条安静街道尽头的大白房子，有着美丽的花园和高大的树木，是一个富裕家庭的家，他们世代居住在那里，在镇上很有名望。",topic:"住宅描写"},
+  {num:92,en:"The careful examination of the old document by the expert historian revealed important facts about the past that had been forgotten, shedding new light on the events that had shaped the nation's history.",zh:"专家历史学家对这份旧文件的仔细检查揭示了关于被遗忘过去的重要事实，为塑造国家历史的事件提供了新的视角。",topic:"历史研究"},
+  {num:93,en:"The complex system of roads and bridges that connected the various parts of the country had been built over many years, and it allowed people and goods to move freely from one place to another.",zh:"连接国家各地区的复杂道路和桥梁系统是多年来建成的，它使人员和货物能够自由地从一地移动到另一地。",topic:"交通网络"},
+  {num:94,en:"The deep love between the old couple, who had been married for more than fifty years, was evident to everyone who knew them, and their happy life together was an example of true devotion and mutual respect.",zh:"那对结婚五十多年的老夫妇之间深厚的爱对每个认识他们的人来说都是显而易见的，他们共同的幸福生活是真正奉献和相互尊重的典范。",topic:"爱情婚姻"},
+  {num:95,en:"The early discovery of the fire by a young boy who was playing near the old building allowed the firemen to arrive in time to prevent the flames from spreading to other structures in the neighborhood.",zh:"一个在旧建筑附近玩耍的小男孩及早发现了火灾，使消防员能够及时赶到，阻止火焰蔓延到附近的其他建筑。",topic:"火灾救援"},
+  {num:96,en:"The general opinion among the experts was that the new plan would be successful, though some expressed doubt about whether enough time and money had been allocated to complete all the necessary work.",zh:"专家们的普遍意见是新计划会成功，尽管有些人对是否分配了足够的时间和资金来完成所有必要工作表示怀疑。",topic:"专家评估"},
+  {num:97,en:"The great mountain range that stretched across the northern part of the country was covered with snow throughout the year, and its high peaks were often hidden by clouds and mist.",zh:"横跨国家北部的大山脉终年积雪，它的高峰常常被云雾遮掩。",topic:"山脉描写"},
+  {num:98,en:"The important decision to build the new hospital in the center of the town was made after much discussion, and it was hoped that the facility would provide better medical care for all the people in the area.",zh:"在市中心建造新医院的重要决定是经过多次讨论后做出的，人们希望该设施能为该地区所有人提供更好的医疗服务。",topic:"医疗建设"},
+  {num:99,en:"The kind words spoken by the stranger to the lost child helped to calm her fears, and he stayed with her until her parents arrived, showing a natural goodness that touched the hearts of all who witnessed the scene.",zh:"陌生人对迷路孩子说的友善话语帮助她平息了恐惧，他陪伴她直到父母到来，展现出自然的善良，感动了所有目睹这一幕的人。",topic:"善良行为"},
+  {num:100,en:"The long journey across the wide ocean, which had taken many weeks under difficult conditions, finally came to an end when the ship reached the safe harbor and the tired passengers could step onto dry land.",zh:"穿越广阔海洋的漫长旅程在艰苦条件下进行了数周，当船抵达安全港湾，疲惫的乘客们踏上陆地时，旅程终于结束了。",topic:"海上旅行"}
+];
+
+/**
+ * @description 渲染句子卡片
+ * @param {Array} list - 要渲染的句子列表
+ */
+function renderSentences(list) {
+  const container = document.getElementById('sentenceList');
+  if (list.length === 0) {
+    container.innerHTML = '<div class="empty-state">没有找到匹配的句子 😢</div>';
+    return;
+  }
+  container.innerHTML = list.map(s => `
+    <div class="sentence-card">
+      <div class="card-header">
+        <span class="card-num">${String(s.num).padStart(3, '0')}</span>
+        <span class="card-topic">${s.topic}</span>
+      </div>
+      <div class="card-en">${s.en}</div>
+      <div class="card-zh">${s.zh}</div>
+    </div>
+  `).join('');
+}
+
+/**
+ * @description 根据筛选条件和搜索关键词过滤句子
+ */
+function filterSentences() {
+  const keyword = document.getElementById('searchInput').value.toLowerCase().trim();
+  const activeFilter = document.querySelector('.filter-btn.active').dataset.filter;
+
+  let filtered = sentences;
+
+  if (activeFilter !== 'all') {
+    filtered = filtered.filter(s => topicCategory[s.topic] === activeFilter);
+  }
+
+  if (keyword) {
+    filtered = filtered.filter(s =>
+      s.en.toLowerCase().includes(keyword) ||
+      s.zh.includes(keyword) ||
+      s.topic.includes(keyword)
+    );
+  }
+
+  renderSentences(filtered);
+}
+
+// 筛选按钮事件
+document.getElementById('filterBar').addEventListener('click', e => {
+  if (!e.target.classList.contains('filter-btn')) return;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  e.target.classList.add('active');
+  filterSentences();
+});
+
+// 搜索框事件
+document.getElementById('searchInput').addEventListener('input', filterSentences);
+
+// 回到顶部按钮
+const backTop = document.getElementById('backTop');
+window.addEventListener('scroll', () => {
+  backTop.classList.toggle('visible', window.scrollY > 400);
+});
+backTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+// 初始渲染
+renderSentences(sentences);
+</script>
+</body>
+</html>
