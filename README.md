@@ -2,6 +2,36 @@
 
 一个基于 C.K. Ogden 基础英语体系的双语学习网页应用，包含100句精选长难句，帮助学习者掌握850核心词汇的实际应用。
 
+## 🌐 在线访问
+
+直接访问已部署的在线版本：  
+🔗 **[100-ogden-english.vercel.app](https://100-ogden-english.vercel.app)**
+
+## ⬇️ 下载使用
+
+### 方式一：下载 ZIP 包
+1. 点击页面上方的 **Code** 按钮
+2. 选择 **Download ZIP**
+3. 解压后用浏览器打开 `index.html` 文件即可使用
+
+### 方式二：克隆仓库
+```bash
+git clone https://github.com/xiaochenwin/100-Ogden-English.git
+cd 100-Ogden-English
+```
+
+### 方式三：本地服务器运行（推荐）
+
+```bash
+# 使用 Python 启动本地服务器
+python -m http.server 8000
+
+# 或使用 Node.js
+npx http-server -p 8000
+```
+
+然后在浏览器中访问 `http://localhost:8000`
+
 ## 🌟 项目特点
 
 - **中英双语对照**：每句均提供英文原句与中文译文
@@ -14,27 +44,9 @@
 
 ```
 .
-├── ogden_850_sentences.html   # 主页面（HTML + CSS + JavaScript）
+├── index.html                 # 主页面（HTML + CSS + JavaScript）
 └── README.md                  # 项目说明文档
 ```
-
-## 🚀 快速开始
-
-### 方式一：直接打开
-
-使用浏览器打开 `ogden_850_sentences.html` 文件即可开始使用。
-
-### 方式二：本地服务器（推荐）
-
-```bash
-# 使用 Python 启动本地服务器
-python -m http.server 8000
-
-# 或使用 Node.js
-npx http-server -p 8000
-```
-
-然后在浏览器中访问 `http://localhost:8000`
 
 ## 🎯 使用方法
 
