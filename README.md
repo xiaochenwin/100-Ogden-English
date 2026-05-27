@@ -45,8 +45,17 @@ npx http-server -p 8000
 ```
 .
 ├── index.html                 # 主页面（HTML + CSS + JavaScript）
+├── Ogden's Basic English——100 Advanced Sentences Workbook.pdf   # PDF练习册
+├── Ogden_100句长难句_完整版.docx                               # Word完整版
 └── README.md                  # 项目说明文档
 ```
+
+## 📥 资源下载
+
+| 文件 | 格式 | 下载链接 |
+|------|------|----------|
+| 100长难句练习册 | PDF | [点击下载](https://github.com/xiaochenwin/100-Ogden-English/raw/main/Ogden%27s%20Basic%20English%E2%80%94%E2%80%94100%20Advanced%20Sentences%20Workbook.pdf) |
+| 100长难句完整版 | DOCX | [点击下载](https://github.com/xiaochenwin/100-Ogden-English/raw/main/Ogden_100%E5%8F%A5%E9%95%BF%E9%9A%BE%E5%8F%A5_%E5%AE%8C%E6%95%B4%E7%89%88.docx) |
 
 ## 🎯 使用方法
 
